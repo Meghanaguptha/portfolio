@@ -188,6 +188,29 @@ document.addEventListener('DOMContentLoaded', () => {
             observer.observe(el);
         }
     });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+
+    if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        let theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'light') {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>';
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeIcon.innerHTML = '<path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m12.728 0l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"></path>';
+            localStorage.setItem('theme', 'light');
+        }
+    });
 });
 
 function switchTab(index) {
